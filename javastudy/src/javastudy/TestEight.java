@@ -1,7 +1,14 @@
-package javastudy;
-
 public class TestEight {
-	  
+	public static void main(String[] args) {
+	      testCircle2D();	
+	}
+	
+	public static void testCircle2D(){
+		Cirle2D c1 = new Cirle2D(new Point(2, 2), 5.2);
+		System.out.println(c1.contain(3, 3));
+		System.out.println(c1.contain(new Cirle2D(new Point(4, 5), 10.5)));
+		System.out.println(c1.overlaps(new Cirle2D(new Point(3, 5),2.3)));
+	}
 }
 
 
@@ -47,12 +54,12 @@ class Point {
         y = initialY;
     }
 
-    // Returns the distance between this point and (0, 0).
+    // Returns the distance between this Point and (0, 0).
     public double distanceFromOrigin() {
         return Math.sqrt(x * x + y * y);
     }
 
-    // Shifts this point's location by the given amount.
+    // Shifts this Point's location by the given amount.
     public void translate(int dx, int dy) {
         x += dx;
         y += dy;
@@ -108,12 +115,27 @@ class Cirle2D{
 		}
 	}
 	
-	public boolean contain(Point point) {
-		return contain(point.getX(), point.getY());
+	public boolean contain(Point Point) {
+		return contain(Point.getX(), Point.getY());
 	}
 	
 	public boolean contain(Cirle2D cirle2d) {
+		if(cirle2d.radius<radius){
 		return Math.abs(p.distance(cirle2d.getPoint()))<Math.abs(radius-cirle2d.radius);
+		}else {
+			return false;
+		}
+	}
+	
+	public boolean overlaps(Cirle2D cirle){
+		double d = Point.distance(p, cirle.p);
+		double R = Math.abs(radius-cirle.radius);
+		double r = Math.abs(radius+cirle.radius);
+		if(d<R&&d>r){
+			return true;
+		}else {
+			return false;
+		}
 	}
 	
 	
